@@ -1,0 +1,35 @@
+html {
+  overflow-y: scroll;
+}
+
+.lajtof-header {
+
+}
+
+.lajtof-header-nav {
+
+}
+
+.lajtof-header-nav-link {
+    &:hover {
+        background-color: lighten($lajtof-color, 8%);
+        color: white;
+        @include lajtof-basic-transition;
+    }
+}
+
+.lajtof-header-nav-item-active {
+    background-color: $white;
+}
+
+.lajtof-section-posts-control {
+
+}
+
+.lajtof-section-posts-new {
+
+}
+
+.lajtof-badge {
+    font-size: 1rem;
+}
