@@ -23,12 +23,16 @@ class PostsController extends Controller
 
     public function create()
     {
+        $this->authorize('update');
+
         $tags = Tag::all();
         return view('posts.create', compact('tags'));
     }
 
     public function store()
     {
+        $this->authorize('update');
+
         $attributes = request()->validate([
             'title' => ['required', 'min:3'],
             'description' => ['required', 'min:3']
@@ -48,11 +52,15 @@ class PostsController extends Controller
 
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
+
         return view('posts.edit', compact('post'));
     }
 
     public function update(Post $post)
     {
+        $this->authorize('update', $post);
+
         $attributes = request()->validate([
             'title' => ['required', 'min:3'],
             'description' => ['required', 'min:3']
@@ -65,6 +73,8 @@ class PostsController extends Controller
 
     public function destroy(Post $post)
     {
+        $this->authorize('update', $post);
+
         $post->delete();
 
         return redirect('posts');

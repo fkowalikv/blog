@@ -5,7 +5,7 @@
 @section('content')
     <section class="lajtof-section-posts my-1">
         <div class="container">
-            @auth
+            @can ('update', $post)
                 <div class="my-1">
                     <a class="btn btn-primary" href="/posts/{{ $post->id }}/edit" role="button">Edit</a>
                     <form class="d-inline" action="/posts/{{ $post->id }}" method="post">
@@ -14,7 +14,7 @@
                         <button class="btn btn-danger" type="submit" name="button">Delete</button>
                     </form>
                 </div>
-            @endauth
+            @endcan
 
             <div class="card bg-light mb-1">
                 <div class="card-body">

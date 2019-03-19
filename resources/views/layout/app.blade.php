@@ -30,7 +30,10 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link text-white lajtof-header-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->username }} <span class="caret"></span>
+                            <span class="{{ Auth::user()->isAdmin() ? 'font-weight-bold' : '' }}">
+                                {{ Auth::user()->isAdmin() ? '[adm] ' : '' }}{{ Auth::user()->username }}
+                            </span>
+                            <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -52,7 +55,7 @@
 
     @yield('content')
 
-    <div class="container-fluid lajtof-footer-copy">
+    <div class="container-fluid mt-1 lajtof-footer-copy">
         <div class="container text-center">
             <span class="d-block">Copyright {{ now()->year }}</span>
             <span class="d-block">Design by ₪</span>
