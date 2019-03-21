@@ -20,6 +20,16 @@ class User extends Authenticatable
         return $this->access;
     }
 
+    public function getFullName()
+    {
+        $title = '';
+        if ($this->isAdmin()) {
+            $title = '[adm] ';
+        }
+
+        return $title . $this->username;
+    }
+
     /**
      * The attributes that are mass assignable.
      *

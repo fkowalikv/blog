@@ -40,8 +40,13 @@
                         <p class="card-text text-justify">{{ $post->description }}</p>
                     </div>
                 </div>
-
             </div>
         </section>
     @endforeach
+    <section>
+        <div class="container">
+            {{ $posts->links() }}
+        </div>
+    </section>
+
 @endsection

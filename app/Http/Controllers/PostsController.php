@@ -11,19 +11,20 @@ class PostsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['create', 'store', 'edit', 'update', 'destroy']);
+        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('can:update')->except(['index', 'show']);
     }
 
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->paginate(7);
 
         return view('posts.index', compact('posts'));
     }
 
     public function create()
     {
-        $this->authorize('update');
+        // $this->authorize('update');
 
         $tags = Tag::all();
         return view('posts.create', compact('tags'));
@@ -31,7 +32,7 @@ class PostsController extends Controller
 
     public function store()
     {
-        $this->authorize('update');
+        // $this->authorize('update');
 
         $attributes = request()->validate([
             'title' => ['required', 'min:3'],
@@ -52,14 +53,14 @@ class PostsController extends Controller
 
     public function edit(Post $post)
     {
-        $this->authorize('update', $post);
+        // $this->authorize('update', $post);
 
         return view('posts.edit', compact('post'));
     }
 
     public function update(Post $post)
     {
-        $this->authorize('update', $post);
+        // $this->authorize('update', $post);
 
         $attributes = request()->validate([
             'title' => ['required', 'min:3'],
@@ -73,7 +74,7 @@ class PostsController extends Controller
 
     public function destroy(Post $post)
     {
-        $this->authorize('update', $post);
+        // $this->authorize('update', $post);
 
         $post->delete();
 

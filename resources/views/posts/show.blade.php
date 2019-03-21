@@ -31,6 +31,14 @@
                         </div>
                     </div>
                     <p class="card-text text-justify">{{ $post->description }}</p>
+                    @if ($post->tags->count())
+                        <span class="mr-1">Tags</span>
+                        <div class="d-inline lajtof-badge">
+                            @foreach ($post->tags as $tag)
+                                <span class="badge badge-pill badge-primary">{{ $tag->name }}</span>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -41,7 +49,7 @@
                             <div class="card-title">
                                 <div class="d-flex">
                                     <div class="flex-fill text-left">
-                                        ({{ $comment->created_at }}) <span class="font-weight-bold">{{ $comment->user->username }}</span>
+                                        ({{ $comment->created_at }}) <span class="font-weight-bold">{{ $comment->user->getFullName() }}</span>
                                     </div>
                                     <div class="flex-fill text-right lajtof-badge">
                                         <form action="/comments/{{ $comment->id }}" method="post">
