@@ -12,14 +12,10 @@ html {
 
 .lajtof-header-nav-link {
     &:hover {
-        background-color: lighten($lajtof-color, 8%);
-        color: white;
+        //background-color: lighten($lajtof-color, 8%);
+        color: $gray-300 !important;
         @include lajtof-basic-transition;
     }
-}
-
-.lajtof-header-nav-item-active {
-    background-color: $white;
 }
 
 .lajtof-section-posts-control {

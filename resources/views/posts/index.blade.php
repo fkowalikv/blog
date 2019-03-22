@@ -1,12 +1,12 @@
 @extends('../layout/app')
 
-@section('title', 'All posts')
+@section('title', __('All posts'))
 
 @section('content')
     @can ('update')
         <section class="lajtof-section-posts-control">
             <div class="container">
-                <a class="btn btn-primary" href="{{ route('posts.create') }}" role="button">New post</a>
+                <a class="btn btn-primary" href="{{ route('posts.create') }}" role="button">{{ __('New post') }}</a>
             </div>
         </section>
     @endcan
@@ -21,19 +21,9 @@
                                     <h4 class="d-inline font-weight-bold text-decoration-none">
                                         <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
                                     </h4>
-                                    @can ('update', $post)
-                                        <div class="d-none d-sm-inline ml-2">
-                                            <a class="btn btn-primary" href="{{ route('posts.edit', $post->id) }}" role="button">Edit</a>
-                                            <form class="d-inline" action="{{ route('posts.destroy', $post->id) }}" method="post">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-danger" type="submit" name="button">Delete</button>
-                                            </form>
-                                        </div>
-                                    @endcan
                                 </div>
                                 <div class="flex-fill text-right">
-                                    <span class="font-italic">{{ $post->created_at }}</span>
+                                    <span class="font-italic">{{ $post->getDate() }}</span>
                                 </div>
                             </div>
                         </div>

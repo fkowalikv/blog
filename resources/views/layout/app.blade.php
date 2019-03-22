@@ -4,62 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Homepage')</title>
+    <title>@yield('title', __('Homepage')){{ ' - ' . env('APP_NAME') }}</title>
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <div class="container-fluid bg-primary lajtof-header mb-1">
-        <div class="container">
-            <ul class="nav flex-column flex-md-row justify-content-md-start lajtof-header-nav">
-                <li class="nav-item">
-                    <a class="nav-link text-white lajtof-header-nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white lajtof-header-nav-link" href="/posts">Posts</a>
-                </li>
-                @guest
-                    <li class="nav-item">
-                        <a class="nav-link text-white lajtof-header-nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </li>
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link text-white lajtof-header-nav-link" href="{{ route('register') }}">{{ __('header.register') }}</a>
-                        </li>
-                    @endif
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link text-white lajtof-header-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <span class="{{ Auth::user()->isAdmin() ? 'font-weight-bold' : '' }}">
-                                {{ Auth::user()->isAdmin() ? '[adm] ' : '' }}{{ Auth::user()->username }}
-                            </span>
-                            <span class="caret"></span>
-                        </a>
+    @include('partials.header')
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+    <main role="main" class="container-fluid">
+        @yield('content')
+    </main>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                @endguest
-            </ul>
-        </div>
-    </div>
-
-    @yield('content')
-
-    <div class="container-fluid mt-1 lajtof-footer-copy">
-        <div class="container text-center">
-            <span class="d-block">Copyright {{ now()->year }}</span>
-            <span class="d-block">Design by ₪</span>
-        </div>
-    </div>
+    @include('partials.footer')
 </body>
 </html>

@@ -10660,13 +10660,8 @@ html {
 }
 
 .lajtof-header-nav-link:hover {
-  background-color: #ac83e8;
-  color: white;
-  transition: all 0.25s ease-in-out;
-}
-
-.lajtof-header-nav-item-active {
-  background-color: #fff;
+  color: #dee2e6 !important;
+  transition: all 0.1s ease-in-out;
 }
 
 .lajtof-badge {

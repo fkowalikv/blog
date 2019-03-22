@@ -29,4 +29,16 @@ class Post extends Model
     {
         $this->comments()->create($comment);
     }
+
+    public function hasTag($tag)
+    {
+        return in_array($tag->id, $this->tags()->pluck('tags.id')->toArray());
+    }
+
+    public function getDate()
+    {
+        return $this->created_at->diffForHumans([
+            'parts' => 1,
+        ]);
+    }
 }

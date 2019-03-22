@@ -7,11 +7,11 @@
         <div class="container">
             @can ('update', $post)
                 <div class="my-1">
-                    <a class="btn btn-primary" href="/posts/{{ $post->id }}/edit" role="button">Edit</a>
+                    <a class="btn btn-primary" href="/posts/{{ $post->id }}/edit" role="button">{{ __('Edit') }}</a>
                     <form class="d-inline" action="/posts/{{ $post->id }}" method="post">
                         @method('DELETE')
                         @csrf
-                        <button class="btn btn-danger" type="submit" name="button">Delete</button>
+                        <button class="btn btn-danger" type="submit" name="button">{{ __('Delete') }}</button>
                     </form>
                 </div>
             @endcan
@@ -26,13 +26,13 @@
                                 </h4>
                             </div>
                             <div class="flex-fill text-right">
-                                <span class="font-italic">{{ $post->created_at }}</span>
+                                <span class="font-italic">{{ $post->getDate() }}</span>
                             </div>
                         </div>
                     </div>
                     <p class="card-text text-justify">{{ $post->description }}</p>
                     @if ($post->tags->count())
-                        <span class="mr-1">Tags</span>
+                        <span class="mr-1">{{ __('Tags') }}</span>
                         <div class="d-inline lajtof-badge">
                             @foreach ($post->tags as $tag)
                                 <span class="badge badge-pill badge-primary">{{ $tag->name }}</span>
@@ -49,13 +49,13 @@
                             <div class="card-title">
                                 <div class="d-flex">
                                     <div class="flex-fill text-left">
-                                        ({{ $comment->created_at }}) <span class="font-weight-bold">{{ $comment->user->getFullName() }}</span>
+                                        ({{ $comment->getDate() }}) <span class="font-weight-bold">{{ $comment->user->getFullName() }}</span>
                                     </div>
                                     <div class="flex-fill text-right lajtof-badge">
                                         <form action="/comments/{{ $comment->id }}" method="post">
                                             @method('PATCH')
                                             @csrf
-                                            <button class="btn {{ $comment->important ? 'btn-danger' : 'btn-primary' }} badge badge-pill" name="important" onclick="this.form.submit()">{{ $comment->important ? 'Important comment' : 'Comment' }}</button>
+                                            <button class="btn {{ $comment->important ? 'btn-danger' : 'btn-primary' }} badge badge-pill" name="important" onclick="this.form.submit()">{{ $comment->important ? __('Important comment') : __('Comment') }}</button>
                                         </form>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                             <p class="card-text text-justify pl-3">{{ $comment->comment }}</p>
                         </div>
                     </div>
-                 @endforeach
+                @endforeach
             @endif
             @auth
                 <div class="card mb-1">
@@ -71,11 +71,11 @@
                         @include('partials.errors')
                         <form action="/posts/{{ $post->id }}/comments" method="post">
                             @csrf
-                            <div class="form-group mt-2">
-                                <label for="comment" class="mt-3">Comment</label>
+                            <div class="form-group">
+                                <label for="comment">{{ __('Comment') }}</label>
                                 <textarea class="form-control {{ $errors->has('description') ? 'border-danger' : '' }}" rows="8" id="comment" name="comment" required></textarea>
                             </div>
-                            <button class="btn btn-primary" type="submit" name="button">Add new comment</button>
+                            <button class="btn btn-primary" type="submit" name="button">{{ __('Add new comment') }}</button>
                         </form>
                     </div>
                 </div>

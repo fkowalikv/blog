@@ -27,4 +27,11 @@ class Comment extends Model
     {
         $this->update(['important' => false]);
     }
+
+    public function getDate()
+    {
+        return $this->created_at->diffForHumans([
+            'parts' => 2,
+        ]);
+    }
 }
