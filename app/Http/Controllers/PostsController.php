@@ -31,14 +31,9 @@ class PostsController extends Controller
 
     public function store()
     {
-        $attributes = request()->validate([
-            'title' => ['required', 'min:3'],
-            'description' => ['required', 'min:3']
-        ]);
-
         $tags = request()->input('tags');
 
-        $post = Post::create($attributes);
+        $post = Post::create($this->validatePost());
         $post->tags()->attach($tags);
 
         \Mail::to(auth()->user()->email)->send(
@@ -62,14 +57,9 @@ class PostsController extends Controller
 
     public function update(Post $post)
     {
-        $attributes = request()->validate([
-            'title' => ['required', 'min:3'],
-            'description' => ['required', 'min:3']
-        ]);
-
         $tags = request()->input('tags');
 
-        $post->update($attributes);
+        $post->update($this->validatePost());
         $post->tags()->detach();
         $post->tags()->attach($tags);
 
@@ -81,5 +71,13 @@ class PostsController extends Controller
         $post->delete();
 
         return redirect('posts');
+    }
+
+    public function validatePost()
+    {
+        return request()->validate([
+            'title' => ['required', 'min:3'],
+            'description' => ['required', 'min:3']
+        ]);
     }
 }
