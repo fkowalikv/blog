@@ -21,6 +21,9 @@
                                     <h4 class="d-inline font-weight-bold text-decoration-none">
                                         <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
                                     </h4>
+                                    <h6 class="d-inline">
+                                        {{ __('by') . ' ' . $post->author->username }}
+                                    </h6>
                                 </div>
                                 <div class="flex-fill text-right">
                                     <span class="font-italic">{{ $post->getDate() }}</span>

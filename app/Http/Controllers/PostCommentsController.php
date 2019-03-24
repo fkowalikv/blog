@@ -15,7 +15,7 @@ class PostCommentsController extends Controller
             'comment' => 'required|min:3'
         ]);
 
-        $attributes['user_id'] = auth()->id();
+        $attributes['author_id'] = auth()->id();
 
         $post->addComment($attributes);
 

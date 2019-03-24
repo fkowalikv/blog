@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Tag;
 use App\Mail\NewPosts;
+use Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PostsController extends Controller
 {
@@ -19,7 +21,6 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::latest()->paginate(15);
-
         return view('posts.index', compact('posts'));
     }
 
@@ -33,11 +34,16 @@ class PostsController extends Controller
     {
         $tags = request()->input('tags');
 
-        $post = Post::create($this->validatePost());
+        $attributes = $this->validatePost();
+        $attributes['author_id'] = auth()->id();
+
+        //dd($attributes);
+
+        $post = Post::create($attributes);
         $post->tags()->attach($tags);
 
-        \Mail::to(auth()->user()->email)->send(
-            new NewPosts($post)
+        Mail::to($post->author->email)->send(
+           new NewPosts($post)
         );
 
         return redirect('posts');
@@ -68,6 +74,7 @@ class PostsController extends Controller
 
     public function destroy(Post $post)
     {
+        // $post->tags()->detach(); //dont have to worry
         $post->delete();
 
         return redirect('posts');

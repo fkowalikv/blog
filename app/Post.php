@@ -12,8 +12,13 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description',
+        'title', 'description', 'author_id',
     ];
+
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function comments()
     {

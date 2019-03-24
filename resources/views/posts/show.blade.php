@@ -21,9 +21,12 @@
                     <div class="card-title">
                         <div class="d-flex">
                             <div class="flex-fill text-left">
-                                <h4 class="font-weight-bold">
+                                <h4 class="font-weight-bold d-inline">
                                     {{ $post->title }}
                                 </h4>
+                                <h6 class="d-inline">
+                                    {{ __('by') . ' ' . $post->author->username }}
+                                </h6>
                             </div>
                             <div class="flex-fill text-right">
                                 <span class="font-italic">{{ $post->getDate() }}</span>
@@ -49,7 +52,7 @@
                             <div class="card-title">
                                 <div class="d-flex">
                                     <div class="flex-fill text-left">
-                                        ({{ $comment->getDate() }}) <span class="font-weight-bold">{{ $comment->user->getFullName() }}</span>
+                                        ({{ $comment->getDate() }}) <span class="font-weight-bold">{{ $comment->author->getFullName() }}</span>
                                     </div>
                                     <div class="flex-fill text-right lajtof-badge">
                                         <form action="/comments/{{ $comment->id }}" method="post">

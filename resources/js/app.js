@@ -31,3 +31,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app'
 });
+
+$("body").on("submit", "form", function() {
+    $(this).submit(function() {
+        return false;
+    });
+    return true;
+});
