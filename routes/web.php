@@ -18,4 +18,8 @@ Route::resource('/posts', 'PostsController');
 Route::post('/posts/{post}/comments', 'PostCommentsController@store');
 Route::patch('/comments/{comment}', 'PostCommentsController@update');
 
+Route::get('/profiles/{profile}', 'ProfileController@show');
+Route::get('/profiles/{profile}/edit', 'ProfileController@edit');
+Route::patch('/profiles/{profile}', 'ProfileController@update');
+
 Auth::routes();

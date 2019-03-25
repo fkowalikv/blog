@@ -17,6 +17,9 @@ class UserTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('admin'),
             'access' => '1',
+            'remember_token' => Str::random(10),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         factory(App\User::class, 100)->create();

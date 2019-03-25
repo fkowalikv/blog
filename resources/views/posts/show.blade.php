@@ -45,8 +45,8 @@
                 </div>
             </div>
 
-            @if ($post->comments->count())
-                @foreach ($post->comments->sortByDesc('created_at') as $comment)
+            @if ($comments->count())
+                @foreach ($comments->sortByDesc('created_at') as $comment)
                     <div class="card mb-1">
                         <div class="card-body">
                             <div class="card-title">
@@ -67,6 +67,9 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="container">
+                  {{ $comments->links() }}
+                </div>
             @endif
             @auth
                 <div class="card mb-1">

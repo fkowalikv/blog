@@ -37,8 +37,6 @@ class PostsController extends Controller
         $attributes = $this->validatePost();
         $attributes['author_id'] = auth()->id();
 
-        //dd($attributes);
-
         $post = Post::create($attributes);
         $post->tags()->attach($tags);
 
@@ -51,7 +49,8 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
-        return view('posts.show', compact('post'));
+        $comments = $post->comments()->paginate(3);
+        return view('posts.show', compact(['post', 'comments']));
     }
 
     public function edit(Post $post)
@@ -74,7 +73,6 @@ class PostsController extends Controller
 
     public function destroy(Post $post)
     {
-        // $post->tags()->detach(); //dont have to worry
         $post->delete();
 
         return redirect('posts');
