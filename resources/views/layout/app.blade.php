@@ -11,6 +11,9 @@
 <body>
     @include('partials.header')
 
+    @include('partials.success')
+    @include('partials.errors')
+    
     <main role="main" class="container-fluid">
         @yield('content')
     </main>

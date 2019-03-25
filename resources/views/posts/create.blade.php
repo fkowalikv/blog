@@ -5,7 +5,6 @@
 @section('content')
     <section class="lajtof-section-posts-new">
         <div class="container">
-            @include('partials.errors')
             <form action="/posts" method="post">
                 @csrf
                 <div class="form-group mt-2">

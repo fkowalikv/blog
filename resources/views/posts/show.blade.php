@@ -3,7 +3,7 @@
 @section('title', $post->title)
 
 @section('content')
-    <section class="lajtof-section-posts my-1">
+    <section class="lajtof-section-posts">
         <div class="container">
             @can ('update', $post)
                 <div class="my-1">

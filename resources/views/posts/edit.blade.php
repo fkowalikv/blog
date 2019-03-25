@@ -5,7 +5,6 @@
 @section('content')
     <section class="lajtof-section-posts-new">
         <div class="container">
-            @include('partials.errors')
             <form action="/posts/{{ $post->id }}" method="post">
                 @method('PATCH')
                 @csrf

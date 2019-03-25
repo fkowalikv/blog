@@ -18,8 +18,9 @@ Route::resource('/posts', 'PostsController');
 Route::post('/posts/{post}/comments', 'PostCommentsController@store');
 Route::patch('/comments/{comment}', 'PostCommentsController@update');
 
-Route::get('/profiles/{profile}', 'ProfileController@show');
-Route::get('/profiles/{profile}/edit', 'ProfileController@edit');
-Route::patch('/profiles/{profile}', 'ProfileController@update');
+Route::get('/users/{user}', 'UserController@show')->name('users.show');
+Route::get('/user/edit', 'UserController@edit')->name('user.edit');
+Route::patch('/user/change-email', 'UserController@changeEmail')->name('user.change.email');;
+Route::patch('/user/change-password', 'UserController@changePassword')->name('user.change.password');;
 
 Auth::routes();

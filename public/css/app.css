@@ -10668,5 +10668,10 @@ html {
   font-size: 1rem;
 }
 
+.lajtof-alert {
+  opacity: 0.8 !important;
+  right: 0;
+}
+
 
 /*# sourceMappingURL=app.css.map*/

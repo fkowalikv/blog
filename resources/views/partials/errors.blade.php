@@ -1,9 +1,15 @@
 @if ($errors->any())
-    <div class="py-2">
-        <ul class="list-group">
-            @foreach ($errors->all() as $error)
-                <li class="list-group-item bg-danger text-white">{{ $error }}</li>
-            @endforeach
-        </ul>
+    <div class="alert alert-danger alert-dismissible fade show mx-2 my-1 shadow position-fixed w-25 lajtof-alert">
+        @foreach ($errors->all() as $error)
+            <span>{{ $error }}</span>
+        @endforeach
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show mx-2 my-1 shadow position-fixed w-25 lajtof-alert">
+        {{ session('error') }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
     </div>
 @endif

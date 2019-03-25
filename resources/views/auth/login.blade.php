@@ -6,14 +6,11 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Login') }}</div>
-                    <div class="">
-                        @include('partials.errors')
-                    </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="form-group row">
-                                <label for="identity" class="col-md-4 col-form-label text-md-right">{{ __('Username or E-Mail') }}</label>
+                                <label for="identity" class="col-md-4 col-form-label text-md-right">{{ __('Username or E-mail') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="identity" type="identity" class="form-control{{ $errors->has('identity') ? ' is-invalid' : '' }}" name="identity" value="{{ old('identity') }}" required autofocus>

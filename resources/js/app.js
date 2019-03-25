@@ -32,9 +32,15 @@ const app = new Vue({
     el: '#app'
 });
 
+// custom
+
 $("body").on("submit", "form", function() {
     $(this).submit(function() {
         return false;
     });
     return true;
+});
+
+$(".lajtof-alert").fadeTo(5000, 500).slideUp(500, function(){
+    $(this).slideUp(500);
 });
