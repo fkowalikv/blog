@@ -5,14 +5,32 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
 
     public function __construct()
     {
-      $this->middleware('auth')->except('show');
+      $this->middleware('auth')->except(['show', 'index', 'search']);
+    }
+
+    public function index()
+    {
+        $users = User::paginate(10);
+        return view('users.index', compact('users'));
+    }
+
+    public function search(Request $request)
+    {
+        $input = $request->input('text');
+
+        $users = User::where('username', 'LIKE', '\\' . $input . '%')
+                     ->orWhere('id', 'LIKE', '\\' . $input . '%')
+                     ->get();
+
+        return response()->json($users);
     }
 
     /**

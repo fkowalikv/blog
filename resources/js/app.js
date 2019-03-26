@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+// window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,7 +20,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,12 +28,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app'
-});
+// const app = new Vue({
+//     el: '#app'
+// });
 
 // custom
-
+    // prevent multiple form submitting
 $("body").on("submit", "form", function() {
     $(this).submit(function() {
         return false;
@@ -41,6 +41,41 @@ $("body").on("submit", "form", function() {
     return true;
 });
 
+    // notification toasts
 $(".lajtof-alert").fadeTo(5000, 500).slideUp(500, function(){
     $(this).slideUp(500);
+});
+
+    // ajax
+        // ajax csrf
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+    // ajax /users search
+$(document).ready(function(){
+    $('#search').on('keyup', function(){
+        var text = $('#search').val();
+        $.ajax({
+            type: 'POST',
+            url: 'users/search',
+            data: {text: $('#search').val()},
+            success: function(response) {
+                $('tbody').empty();
+                $('.lajtof-section-pagination').remove();
+                for (var user of response) {
+                    console.log(user);
+                    $('tbody').append(
+                        '<tr>' +
+                        '<td>' + user.id + '</td>' +
+                        '<td>' + user.username + '</td>' +
+                        '<td>' + user.email + '</td>' +
+                        '</tr>'
+                    );
+                }
+            }
+        });
+    });
 });
