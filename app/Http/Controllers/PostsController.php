@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Tag;
-use App\Mail\NewPosts;
 use Auth;
+use App\Comment;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class PostsController extends Controller
 {
@@ -40,16 +39,12 @@ class PostsController extends Controller
         $post = Post::create($attributes);
         $post->tags()->attach($tags);
 
-        Mail::to($post->author->email)->send(
-           new NewPosts($post)
-        );
-
         return redirect('posts');
     }
 
     public function show(Post $post)
     {
-        $comments = $post->comments()->paginate(3);
+        $comments = $post->comments()->orderBy('updated_at', 'desc')->paginate(3);
         return view('posts.show', compact(['post', 'comments']));
     }
 

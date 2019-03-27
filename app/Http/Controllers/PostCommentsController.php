@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Post;
+use App\Events\PostCommented;
 
 use Illuminate\Http\Request;
 
@@ -17,7 +18,9 @@ class PostCommentsController extends Controller
 
         $attributes['author_id'] = auth()->id();
 
-        $post->addComment($attributes);
+        $comment = $post->addComment($attributes);
+
+        event(new PostCommented($comment));
 
         return back();
     }

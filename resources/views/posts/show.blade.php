@@ -46,7 +46,7 @@
             </div>
 
             @if ($comments->count())
-                @foreach ($comments->sortByDesc('created_at') as $comment)
+                @foreach ($comments as $comment)
                     <div class="card mb-1">
                         <div class="card-body">
                             <div class="card-title">

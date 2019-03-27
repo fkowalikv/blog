@@ -7,20 +7,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewPosts extends Mailable
+class PostCommented extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $post;
+    public $comment;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($post)
+    public function __construct($comment)
     {
-        $this->post = $post;
+        $this->comment = $comment;
     }
 
     /**
@@ -30,6 +30,6 @@ class NewPosts extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.new-posts');
+        return $this->markdown('mail.new-post-commented');
     }
 }
