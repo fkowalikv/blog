@@ -26,4 +26,6 @@ Route::get('/user/edit', 'UsersController@edit')->name('user.edit');
 Route::patch('/user/change-email', 'UsersController@changeEmail')->name('user.change.email');;
 Route::patch('/user/change-password', 'UsersController@changePassword')->name('user.change.password');;
 
+Route::post('/user/notifications/{notification}/read', 'UsersController@edit')->name('user.edit');
+
 Auth::routes();

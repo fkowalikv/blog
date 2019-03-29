@@ -18,9 +18,7 @@ class PostCommentsController extends Controller
 
         $attributes['author_id'] = auth()->id();
 
-        $comment = $post->addComment($attributes);
-
-        event(new PostCommented($comment));
+        $post->addComment($attributes);
 
         return back();
     }

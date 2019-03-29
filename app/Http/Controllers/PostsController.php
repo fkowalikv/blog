@@ -44,7 +44,9 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
-        $comments = $post->comments()->orderBy('updated_at', 'desc')->paginate(3);
+        Auth::user()->markNotificationsAsRead($post);
+
+        $comments = $post->comments()->orderBy('created_at', 'desc')->paginate(3);
         return view('posts.show', compact(['post', 'comments']));
     }
 

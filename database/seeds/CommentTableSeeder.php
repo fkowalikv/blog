@@ -11,6 +11,7 @@ class CommentTableSeeder extends Seeder
      */
     public function run()
     {
+        \App\Comment::flushEventListeners();
         factory(App\Comment::class, 50)->create();
     }
 }
