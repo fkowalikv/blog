@@ -75,11 +75,11 @@ class UsersController extends Controller
 
         if (!(Hash::check($request->get('current-password'), $user->password))) {
             // The passwords matches
-            return redirect()->back()->with("error", "Your current password does not match with the password you provided. Please try again.");
+            return redirect()->back()->withErrors("Your current password does not match with the password you provided. Please try again.");
         }
         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
             //Current password and new password are same
-            return redirect()->back()->with("error", "New Password cannot be same as your current password. Please choose a different password.");
+            return redirect()->back()->withErrors("New Password cannot be same as your current password. Please choose a different password.");
         }
 
         $request->validate([

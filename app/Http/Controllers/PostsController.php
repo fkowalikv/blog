@@ -65,7 +65,7 @@ class PostsController extends Controller
         $post->tags()->detach();
         $post->tags()->attach($tags);
 
-        return redirect('posts/' . $post->id);
+        return redirect('posts' . $post->id);
     }
 
     public function destroy(Post $post)

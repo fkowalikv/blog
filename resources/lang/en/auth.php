@@ -16,5 +16,6 @@ return [
     'register' => 'Register',
     'failed' => 'Please enter correct credenials.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'success' => 'You have been logged in successfully.',
 
 ];

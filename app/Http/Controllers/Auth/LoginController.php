@@ -78,18 +78,31 @@ class LoginController extends Controller
     */
     protected function sendFailedLoginResponse(Request $request)
     {
-       $request->session()->put('login_error', trans('auth.failed'));
-       throw ValidationException::withMessages(
-           [
-               'error' => [trans('auth.failed')],
-           ]
-       );
+//       $request->session()->flash('error', trans('auth.failed'));
+       throw ValidationException::withMessages([
+           'error' => trans('auth.failed')
+       ]);
+
+//       return redirect('login');
     }
 
     public function authenticated(Request $request, $user)
     {
-      $user->last_login = Carbon::now()->toDateTimeString();
-      $user->last_login_ip = $request->getClientIp();
-      $user->save();
+        $request->session()->flash('success', __('auth.success'));
+
+        $user->last_login = Carbon::now()->toDateTimeString();
+        $user->last_login_ip = $request->getClientIp();
+        $user->save();
+    }
+
+    public function logout(Request $request)
+    {
+
+        $this->guard()->logout();
+        $request->session()->invalidate();
+
+        $request->session()->flash('success', __('auth.logout'));
+
+        return $this->loggedOut($request) ?: redirect('/');
     }
 }
