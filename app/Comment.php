@@ -46,14 +46,24 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function markImportant()
-    {
-        $this->update(['important' => true]);
+    public function likes() {
+        return $this->hasMany(Like::class);
     }
 
-    public function markNotImportant()
+    public function like()
     {
-        $this->update(['important' => false]);
+        if (!auth()->user()->hasLiked($this)) {
+            $attributes['user_id'] = auth()->id();
+            $attributes['comment_id'] = $this->id;
+
+            Like::create($attributes);
+        }
+        else $this->dislike();
+    }
+
+    public function dislike()
+    {
+        $this->likes()->where('user_id', auth()->id())->delete();
     }
 
     public function getDate()

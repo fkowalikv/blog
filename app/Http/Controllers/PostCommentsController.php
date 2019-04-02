@@ -25,9 +25,7 @@ class PostCommentsController extends Controller
 
     public function update(Comment $comment)
     {
-        $method = $comment->important ? 'markNotImportant' : 'markImportant';
-
-        $comment->$method();
+        $comment->like();
 
         return back();
     }

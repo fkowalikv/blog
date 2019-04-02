@@ -58,7 +58,7 @@
                                         <form action="/comments/{{ $comment->id }}" method="post">
                                             @method('PATCH')
                                             @csrf
-                                            <button class="btn {{ $comment->important ? 'btn-danger' : 'btn-primary' }} badge badge-pill" name="important" onclick="this.form.submit()">{{ $comment->important ? __('Important comment') : __('Comment') }}</button>
+                                            <button class="btn {{ $comment->important ? 'btn-danger' : 'btn-primary' }} badge badge-pill" name="important" onclick="this.form.submit()">+ {{ $comment->likes()->count() }}</button>
                                         </form>
                                     </div>
                                 </div>

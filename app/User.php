@@ -55,6 +55,15 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function hasLiked($comment) {
+        return $comment->likes->where('user_id', '=', auth()->id())->count() > 0;
+    }
+
     public function isAdmin()
     {
         return $this->access;

@@ -1,4 +1,4 @@
-<?php
+<?phpPosty
 
 return [
 
