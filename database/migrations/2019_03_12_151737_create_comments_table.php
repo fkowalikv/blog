@@ -29,7 +29,6 @@ class CreateCommentsTable extends Migration
                   ->onDelete('cascade');
 
             $table->text('comment');
-            $table->boolean('important')->default(false);
             $table->timestamps();
         });
     }
