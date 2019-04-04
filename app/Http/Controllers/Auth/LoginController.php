@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class LoginController extends Controller
@@ -90,13 +91,18 @@ class LoginController extends Controller
     {
         $request->session()->flash('success', __('auth.success'));
 
-        $user->last_login = Carbon::now()->toDateTimeString();
-        $user->last_login_ip = $request->getClientIp();
+        session()->put('last_login', Carbon::now()->toDateTimeString());
+        session()->put('last_login_ip', $request->getClientIp());
+
         $user->save();
     }
 
     public function logout(Request $request)
     {
+
+        Auth::user()->last_login = session('last_login', Carbon::now()->toDateTimeString());
+        Auth::user()->last_login_ip = session('last_login_ip', $request->getClientIp());
+        Auth::user()->save();
 
         $this->guard()->logout();
         $request->session()->invalidate();
