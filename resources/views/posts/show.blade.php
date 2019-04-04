@@ -33,7 +33,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="card-text text-justify">{{ $post->description }}</p>
+                    <p class="card-text text-justify">{!! $post->description !!}</p>
                     @if ($post->tags->count())
                         <span class="mr-1">{{ __('Tags') }}</span>
                         <div class="d-inline lajtof-badge">
