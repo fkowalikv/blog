@@ -23,7 +23,7 @@
                         </li>
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link text-white lajtof-header-nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link {{ Auth::user()->unreadNotifications()->count() ? 'font-weight-bold text-warning' : 'text-white' }} lajtof-header-nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ __('Notifications') }}
                             </a>
 

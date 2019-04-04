@@ -5,7 +5,6 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Information</div>
                     @auth
                         <div class="card-body">
                             <p>Hello {{ Auth::user()->username }}</p>
@@ -16,7 +15,7 @@
 
                     @guest
                         <div class="card-body">
-                            Hello world!
+                            Hello guest!
                         </div>
                     @endguest
                 </div>
