@@ -3,7 +3,7 @@
 @section('title', __('Editing') . ' ' . $post->title)
 
 @section('content')
-    <section class="lajtof-section-posts-new">
+    <section class="lajtof-section-posts-edit">
         <div class="container">
             <form action="/posts/{{ $post->id }}" method="post">
                 @method('PATCH')

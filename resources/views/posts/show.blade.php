@@ -53,9 +53,11 @@
                                 <div class="d-flex">
                                     <div class="flex-fill text-left">
                                         ({{ $comment->getDate() }}) <span class="font-weight-bold">{{ $comment->author->getFullName() }}</span>
+                                        <a class="btn btn-sm btn-primary" href="{{ route('comments.edit', $comment) }}" role="button">{{ __('Edit') }}</a>
                                     </div>
+
                                     <div class="flex-fill text-right lajtof-badge">
-                                        <form action="/comments/{{ $comment->id }}" method="post">
+                                        <form action="/comments/{{ $comment->id }}/like" method="post">
                                             @method('PATCH')
                                             @csrf
                                             <button class="btn {{ $comment->important ? 'btn-danger' : 'btn-primary' }} badge badge-pill" name="important" onclick="this.form.submit()">+ {{ $comment->likes()->count() }}</button>

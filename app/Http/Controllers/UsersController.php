@@ -53,7 +53,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $user = Auth::user();
-        return view('users.edit', compact('user'));
+        return view('users.edit.blade.php', compact('user'));
     }
 
     public function changeEmail(Request $request, User $user)

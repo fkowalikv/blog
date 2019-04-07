@@ -53,7 +53,7 @@ class PostsController extends Controller
     {
         $tags = Tag::all();
 
-        return view('posts.edit', compact(['post', 'tags']));
+        return view('posts.edit.blade.php', compact(['post', 'tags']));
     }
 
     public function update(Post $post)
