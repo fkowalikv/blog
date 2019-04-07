@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * App\User
@@ -43,7 +44,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     public function posts()
     {
@@ -64,19 +65,9 @@ class User extends Authenticatable
         return $comment->likes->where('user_id', '=', auth()->id())->count() > 0;
     }
 
-    public function isAdmin()
-    {
-        return $this->access;
-    }
-
     public function getFullName()
     {
-        $title = '';
-        if ($this->isAdmin()) {
-            $title = '[adm] ';
-        }
-
-        return $title . $this->username;
+        return $this->username;
     }
 
     public function markNotificationsAsRead(Post $post) {

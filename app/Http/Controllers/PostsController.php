@@ -13,7 +13,9 @@ class PostsController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
-        $this->middleware('can:update')->except(['index', 'show']);
+        $this->middleware(['permission:create posts'])->only(['create', 'store']);
+        $this->middleware(['permission:update posts'])->only(['update', 'edit']);
+        $this->middleware(['permission:delete posts'])->only(['destroy']);
     }
 
     public function index()
@@ -53,7 +55,7 @@ class PostsController extends Controller
     {
         $tags = Tag::all();
 
-        return view('posts.edit.blade.php', compact(['post', 'tags']));
+        return view('posts.edit', compact(['post', 'tags']));
     }
 
     public function update(Post $post)
@@ -64,7 +66,7 @@ class PostsController extends Controller
         $post->tags()->detach();
         $post->tags()->attach($tags);
 
-        return redirect('posts' . $post->id);
+        return redirect('posts/' . $post->id);
     }
 
     public function destroy(Post $post)

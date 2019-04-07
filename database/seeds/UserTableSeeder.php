@@ -16,8 +16,33 @@ class UserTableSeeder extends Seeder
             'email' => 'admin@example.com',
             'email_verified_at' => now(),
             'password' => bcrypt('admin'),
-            'access' => '1',
             'remember_token' => Str::random(10),
+            'last_login' => now(),
+            'last_login_ip' => '1.2.3.4',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('users')->insert([
+            'username' => 'moderator',
+            'email' => 'moderator@example.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('moderator'),
+            'remember_token' => Str::random(10),
+            'last_login' => now(),
+            'last_login_ip' => '1.2.3.4',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('users')->insert([
+            'username' => 'lajtof',
+            'email' => 'lajtof@example.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('lajtof'),
+            'remember_token' => Str::random(10),
+            'last_login' => now(),
+            'last_login_ip' => '1.2.3.4',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

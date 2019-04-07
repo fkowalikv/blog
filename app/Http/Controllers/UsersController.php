@@ -13,7 +13,10 @@ class UsersController extends Controller
 
     public function __construct()
     {
-      $this->middleware('auth')->except(['show', 'index', 'search']);
+      $this->middleware('auth');
+      $this->middleware(['permission:read users'])->only(['index', 'show']);
+      $this->middleware(['permission:update users'])->only(['edit', 'changeEmail', 'changePassword']);
+      $this->middleware(['permission:search users'])->only(['search', 'show']);
     }
 
     public function index()

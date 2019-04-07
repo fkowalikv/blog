@@ -3,6 +3,7 @@
 namespace App;
 use App\Events\PostCommented;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * App\Comment
@@ -30,6 +31,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Comment extends Model
 {
+    use HasRoles;
+
+    protected $guard_name = 'web';
+
     protected $fillable = ['comment', 'author_id', 'important'];
 
     protected $dispatchesEvents = [

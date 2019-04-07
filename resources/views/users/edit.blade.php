@@ -11,7 +11,7 @@
             <div class="card my-1">
                 <div class="card-body">
                     <h4 class="card-title">{{ __('Change E-mail Address') }}</h4>
-                    <form method="post" action="{{ route('user.change.email') }}">
+                    <form method="post" action="{{ route('user.change-email') }}">
                         {{ csrf_field() }}
                         {{ method_field('patch') }}
                         <div class="form-group">
@@ -25,7 +25,7 @@
             <div class="card my-1">
                 <div class="card-body">
                     <h4 class="card-title">{{ __('Change password') }}</h4>
-                    <form method="post" action="{{ route('user.change.password') }}">
+                    <form method="post" action="{{ route('user.change-password') }}">
                         {{ csrf_field() }}
                         {{ method_field('patch') }}
                         <div class="form-group">

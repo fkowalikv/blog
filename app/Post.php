@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * App\Post
@@ -29,6 +30,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Post extends Model
 {
+    use HasRoles;
+
+    protected $guard_name = 'web';
+
     /**
      * The attributes that are mass assignable.
      *

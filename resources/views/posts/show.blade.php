@@ -5,9 +5,14 @@
 @section('content')
     <section class="lajtof-section-posts">
         <div class="container">
-            @can ('update', $post)
+            @can ('update posts')
                 <div class="my-1">
                     <a class="btn btn-primary" href="/posts/{{ $post->id }}/edit" role="button">{{ __('Edit') }}</a>
+                </div>
+            @endcan
+
+            @can ('delete posts')
+                <div class="my-1">
                     <form class="d-inline" action="/posts/{{ $post->id }}" method="post">
                         @method('DELETE')
                         @csrf
@@ -73,7 +78,7 @@
                   {{ $comments->links() }}
                 </div>
             @endif
-            @auth
+            @can('write comments')
                 <div class="card mb-1">
                     <div class="card-body">
                         @include('partials.errors')
@@ -87,7 +92,7 @@
                         </form>
                     </div>
                 </div>
-            @endauth
+            @endcan
 
         </div>
     </section>

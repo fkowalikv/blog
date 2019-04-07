@@ -13,6 +13,10 @@ class PostCommentsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(['permission:create comments'])->only(['store']);
+        $this->middleware(['permission:update comments'])->only(['edit', 'update']);
+        //$this->middleware(['permission:delete comments'])->only(['destroy']);
+        $this->middleware(['permission:like comments'])->only(['like']);
     }
 
     public function store(Post $post)
@@ -26,7 +30,7 @@ class PostCommentsController extends Controller
         return back();
     }
 
-    public function updateLike(Comment $comment)
+    public function like(Comment $comment)
     {
         $comment->like();
 

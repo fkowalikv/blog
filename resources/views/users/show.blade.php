@@ -8,7 +8,7 @@
             <h1 class="mt-2 text-center">
                 {{ $user->username }}
             </h1>
-            <a class="btn btn-primary" href="{{ route('edit.blade.php') }}">{{ __('Edit profile') }}</a>
+            <a class="btn btn-primary" href="{{ route('user.edit') }}">{{ __('Edit profile') }}</a>
         </div>
     </section>
 @endsection

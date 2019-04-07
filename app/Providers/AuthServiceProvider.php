@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Post' => 'App\Policies\PostPolicy',
+        // 'App\Post' => 'App\Policies\PostPolicy',
     ];
 
     /**
@@ -25,8 +25,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        $gate->before(function ($user) {
-            return $user->isAdmin();
+        // Implicitly grant "Admin" role all permissions
+        // This works in the app by using gate-related functions like auth()->user->can() and @can()
+        $gate->before(function ($user, $ability) {
+            return $user->hasRole('Admin') ? true : null;
         });
+
     }
 }

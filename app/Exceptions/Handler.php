@@ -52,6 +52,12 @@ class Handler extends ExceptionHandler
             }
         }
 
+        if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
+            if (view()->exists('errors.' . $exception->getStatusCode())) {
+                return response()->view('errors.' . $exception->getStatusCode(), [], $exception->getStatusCode());
+            }
+        }
+
         return parent::render($request, $exception);
     }
 }

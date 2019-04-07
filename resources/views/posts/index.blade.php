@@ -3,7 +3,7 @@
 @section('title', __('All posts'))
 
 @section('content')
-    @can ('update')
+    @can ('create posts')
         <section class="lajtof-section-posts-control">
             <div class="container">
                 <a class="btn btn-primary" href="{{ route('posts.create') }}" role="button">{{ __('New post') }}</a>
