@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="card-text text-justify">{{ $post->description }}</p>
+                        <p class="card-text text-justify">{{ strip_tags($post->description) }}</p>
                     </div>
                 </div>
             </div>

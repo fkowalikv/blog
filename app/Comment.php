@@ -52,13 +52,15 @@ class Comment extends Model
 
     public function like()
     {
-        if (!auth()->user()->hasLiked($this)) {
-            $attributes['user_id'] = auth()->id();
-            $attributes['comment_id'] = $this->id;
+        if (auth()->user())
+            if (!auth()->user()->hasLiked($this)) {
+                $attributes['user_id'] = auth()->id();
+                $attributes['comment_id'] = $this->id;
 
-            Like::create($attributes);
-        }
-        else $this->dislike();
+                Like::create($attributes);
+            }
+            else $this->dislike();
+        else return back()->withErrors(__('You must be logged in to like a comment') . '!');
     }
 
     public function dislike()

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Tag;
 use Auth;
-use App\Comment;
 
 use Illuminate\Http\Request;
 
@@ -44,7 +43,7 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
-        Auth::user()->markNotificationsAsRead($post);
+        if (Auth::user()) Auth::user()->markNotificationsAsRead($post);
 
         $comments = $post->comments()->orderBy('created_at', 'desc')->paginate(3);
         return view('posts.show', compact(['post', 'comments']));
