@@ -52,7 +52,7 @@
 
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link text-white dropdown-toggle lajtof-header-nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <span class="{{ Auth::user()->isAdmin() ? 'font-weight-bold' : '' }}">
+                                <span class="">
                                     {{ Auth::user()->username }}
                                 </span>
                                 <span class="caret"></span>
