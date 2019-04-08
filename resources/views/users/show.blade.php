@@ -11,7 +11,7 @@
                 </h1>
                 <div class="mx-2">
                     @foreach ($user->getRoleNames() as $role)
-                        <span class="badge badge-primary mx-1 lajtof-badge">{{ $role }}</span>
+                        <span class="badge badge-primary mx-1 lajtof-badge">{{ __($role) }}</span>
                     @endforeach
                 </div>
             </div>
