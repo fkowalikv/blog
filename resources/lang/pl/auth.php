@@ -1,4 +1,4 @@
-<?phpPosty
+<?php
 
 return [
 
@@ -16,5 +16,6 @@ return [
     'failed' => 'Proszę podać prawidłowe dane logowania.',
     'throttle' => 'Zbyt dużo prób logowania. Spróbuj ponownie za :seconds sekund.',
     'success' => 'Zostałeś pomyślnie zalogowany.',
+    'logout' => 'Zostałeś wylogowany.',
 
 ];
