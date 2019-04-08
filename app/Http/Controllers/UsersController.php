@@ -15,8 +15,8 @@ class UsersController extends Controller
     {
       $this->middleware('auth');
       $this->middleware(['permission:read users'])->only(['index', 'show']);
-      $this->middleware(['permission:update users'])->only(['edit', 'changeEmail', 'changePassword']);
-      $this->middleware(['permission:search users'])->only(['search', 'show']);
+      $this->middleware(['can:update,user'])->only(['edit', 'changeEmail', 'changePassword']);
+      $this->middleware(['permission:search users'])->only(['search']);
     }
 
     public function index()
@@ -55,14 +55,11 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        $user = Auth::user();
-        return view('users.edit.blade.php', compact('user'));
+        return view('users.edit', compact('user'));
     }
 
     public function changeEmail(Request $request, User $user)
     {
-        $user = Auth::user();
-
         $attributes = $request->validate([
             'email' => 'required|email|unique:users',
         ]);
@@ -74,14 +71,10 @@ class UsersController extends Controller
 
     public function changePassword(Request $request, User $user)
     {
-        $user = Auth::user();
-
         if (!(Hash::check($request->get('current-password'), $user->password))) {
-            // The passwords matches
             return redirect()->back()->withErrors("Your current password does not match with the password you provided. Please try again.");
         }
         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
-            //Current password and new password are same
             return redirect()->back()->withErrors("New Password cannot be same as your current password. Please choose a different password.");
         }
 

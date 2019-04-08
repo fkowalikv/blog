@@ -34,7 +34,6 @@ class RolesAndPermissionsSeeder extends Seeder
         // User class
         Permission::create(['name' => 'create users']);
         Permission::create(['name' => 'read users']);
-        Permission::create(['name' => 'update users']);
         Permission::create(['name' => 'delete users']);
         Permission::create(['name' => 'search users']);
 
@@ -46,15 +45,15 @@ class RolesAndPermissionsSeeder extends Seeder
                 'read posts',
                 'create comments',
                 'like comments',
+                'read users',
             ]);
 
         // or may be done by chaining
         $role = Role::create(['name' => 'moderator'])
             ->givePermissionTo([
-                'edit posts',
+                'update posts',
                 'update comments',
                 'read users',
-                'update users',
                 'search users',
             ]);
 

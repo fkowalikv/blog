@@ -11,9 +11,9 @@
             <div class="card my-1">
                 <div class="card-body">
                     <h4 class="card-title">{{ __('Change E-mail Address') }}</h4>
-                    <form method="post" action="{{ route('user.change-email') }}">
-                        {{ csrf_field() }}
-                        {{ method_field('patch') }}
+                    <form method="post" action="{{ route('users.change-email', $user) }}">
+                        @csrf
+                        @method('patch')
                         <div class="form-group">
                             <input type="email" class="form-control form-control-lg" name="email" placeholder="{{ $user->email }}">
                         </div>
@@ -25,9 +25,9 @@
             <div class="card my-1">
                 <div class="card-body">
                     <h4 class="card-title">{{ __('Change password') }}</h4>
-                    <form method="post" action="{{ route('user.change-password') }}">
-                        {{ csrf_field() }}
-                        {{ method_field('patch') }}
+                    <form method="post" action="{{ route('users.change-password', $user) }}">
+                        @csrf
+                        @method('patch')
                         <div class="form-group">
                             <input type="password" class="form-control form-control-lg my-1" name="current-password" placeholder="{{ __('Current password') }}">
                             <input type="password" class="form-control form-control-lg my-1" name="new-password" placeholder="{{ __('New password') }}">

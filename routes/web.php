@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::resource('/posts', 'PostsController');
@@ -24,8 +13,8 @@ Route::get('/users', 'UsersController@index')->name('users.index');
 Route::post('/users/search','UsersController@search')->name('users.search');
 
 Route::get('/users/{user}', 'UsersController@show')->name('users.show');
-Route::get('/user/edit.blade.php', 'UsersController@edit')->name('user.edit');
-Route::patch('/user/change-email', 'UsersController@changeEmail')->name('user.change-email');
-Route::patch('/user/change-password', 'UsersController@changePassword')->name('user.change-password');
+Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
+Route::patch('/users/{user}/change-email', 'UsersController@changeEmail')->name('users.change-email');
+Route::patch('/users/{user}/change-password', 'UsersController@changePassword')->name('users.change-password');
 
 Auth::routes();
