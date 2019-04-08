@@ -46,6 +46,7 @@ class RolesAndPermissionsSeeder extends Seeder
                 'create comments',
                 'like comments',
                 'read users',
+                'search users',
             ]);
 
         // or may be done by chaining

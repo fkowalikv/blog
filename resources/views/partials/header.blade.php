@@ -29,22 +29,28 @@
 
                             <div class="dropdown-menu dropdown-menu-right p-0 lajtof-header-notifications-dropdown" aria-labelledby="navbarDropdown">
                                 <div class="card-header p-1 text-center">{{ __('Notifications') }}</div>
-                                @if(Auth::user()->unreadNotifications()->count())
-                                    <div class="card-body p-0 my-1 mx-2">
-                                        @foreach (Auth::user()->unreadNotifications as $notification)
-                                            <div class="font-weight-bold m-0">
-                                                <a href="{{ route('posts.show', $notification->data['post_id']) }}">{{ $notification->data['author'] . ' ' . __('commented') . ' ' . $notification->created_at->diffForHumans(['parts' => 1]) }}</a>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @endif
-                                @if(Auth::user()->readNotifications()->count())
-                                    <div class="card-body p-0 my-1 mx-2">
-                                        @foreach (Auth::user()->readNotifications as $notification)
-                                            <div class="m-0">
-                                                <a href="{{ route('posts.show', $notification->data['post_id']) }}">{{ $notification->data['author'] . ' ' . __('commented') . ' ' . $notification->created_at->diffForHumans(['parts' => 1]) }}</a>
-                                            </div>
-                                        @endforeach
+                                @if(Auth::user()->notifications()->count())
+                                    @if(Auth::user()->unreadNotifications()->count())
+                                        <div class="card-body p-0 my-1 mx-2">
+                                            @foreach (Auth::user()->unreadNotifications as $notification)
+                                                <div class="font-weight-bold m-0">
+                                                    <a href="{{ route('posts.show', $notification->data['post_id']) }}">{{ $notification->data['author'] . ' ' . __('commented') . ' ' . $notification->created_at->diffForHumans(['parts' => 1]) }}</a>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                    @if(Auth::user()->readNotifications()->count())
+                                        <div class="card-body p-0 my-1 mx-2">
+                                            @foreach (Auth::user()->readNotifications as $notification)
+                                                <div class="m-0">
+                                                    <a href="{{ route('posts.show', $notification->data['post_id']) }}">{{ $notification->data['author'] . ' ' . __('commented') . ' ' . $notification->created_at->diffForHumans(['parts' => 1]) }}</a>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                @else
+                                    <div class="card-body p-0 my-1 mx-2 font-weight-bold">
+                                        {{ __('No notifications') }}
                                     </div>
                                 @endif
                             </div>
